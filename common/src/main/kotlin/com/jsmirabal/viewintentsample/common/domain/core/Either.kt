@@ -16,16 +16,16 @@ sealed class Either<out S, out E> {
 
     fun error(): Error<out E>? = this as? Error
 
-    fun successOrError(success: (S) -> Unit, error: (E) -> Unit) {
+    fun either(success: (S) -> Unit, error: (E) -> Unit) {
         when(this) {
             is Success -> success(get())
             is Error -> error(get())
         }
     }
 
-    fun <T> successOrThrow(returnSuccess: (S) -> T, throwE: (E) -> Exception): T {
+    fun <T> either(success: (S) -> T, throwE: (E) -> Exception): T {
         return when(this) {
-            is Success -> returnSuccess(get())
+            is Success -> success(get())
             is Error -> throw throwE(get())
         }
     }

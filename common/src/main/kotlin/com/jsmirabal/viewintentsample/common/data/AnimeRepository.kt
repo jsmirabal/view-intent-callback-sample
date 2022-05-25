@@ -13,6 +13,11 @@ class AnimeRepository {
         Thread.sleep(3000) // long operation
         return Either.Success(AnimeResult("saved"))
     }
+
+    fun fetchAnimes(): Either<AnimeResult, AnimeError> {
+        Thread.sleep(3000) // long operation
+        return Either.Success(AnimeResult("list"))
+    }
 }
 
 data class AnimeResult(val animeInfo: String)
