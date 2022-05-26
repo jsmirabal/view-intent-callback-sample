@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.core.widget.addTextChangedListener
 import com.jsmirabal.viewintentsample.common.data.AnimeError
 import com.jsmirabal.viewintentsample.common.data.AnimeResult
-import com.jsmirabal.viewintentsample.common.viewintent.ViewIntentSender
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentSender
 import com.jsmirabal.viewintentsample.mvp.databinding.ActivityAnimeBinding
 import com.jsmirabal.viewintentsample.mvp.simplified.AnimeActivityContract.Intent.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,9 +19,9 @@ class AnimeActivity : Activity(), AnimeActivityContract.View {
 
     private val binding: ActivityAnimeBinding by lazy { ActivityAnimeBinding.inflate(layoutInflater) }
 
-    override var sender: ViewIntentSender = {  }
+    override var sender: ViewIntentSender<AnimeActivityContract.Intent> = {  }
 
-    override fun onIntent(sender: ViewIntentSender) {
+    override fun onIntent(sender: ViewIntentSender<AnimeActivityContract.Intent>) {
         this.sender = sender
     }
 

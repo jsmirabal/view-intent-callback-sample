@@ -3,7 +3,6 @@ package com.jsmirabal.viewintentsample.mvp.simplified
 import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
-import com.jsmirabal.viewintentsample.common.viewintent.ViewIntent
 import com.jsmirabal.viewintentsample.mvp.simplified.AnimeActivityContract.Intent.*
 import javax.inject.Inject
 
@@ -18,7 +17,7 @@ class AnimeActivityPresenter @Inject constructor(
         view.onIntent(::receive)
     }
 
-    private fun receive(intent: ViewIntent) {
+    private fun receive(intent: AnimeActivityContract.Intent) {
         when (intent) {
             LoadAnimes -> fetchAnimes()
             is SearchAnime -> searchAnime(intent.animeName)
