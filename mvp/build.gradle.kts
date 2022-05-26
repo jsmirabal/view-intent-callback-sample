@@ -49,6 +49,9 @@ dependencies {
     kapt("androidx.hilt:hilt-compiler:1.0.0")
     kapt("com.google.dagger:hilt-android-compiler:2.41")
 
+    implementation("io.reactivex.rxjava3:rxjava:3.1.3")
+    implementation("com.jakewharton.rxbinding4:rxbinding:4.0.0")
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testImplementation("io.mockk:mockk:1.9.3")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
