@@ -1,4 +1,4 @@
-package com.jsmirabal.viewintentsample.mvp.simplified
+package com.jsmirabal.viewintentsample.mvp.viewintentcallback
 
 import com.jsmirabal.viewintentsample.common.data.AnimeError
 import com.jsmirabal.viewintentsample.common.data.AnimeResult

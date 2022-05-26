@@ -1,4 +1,4 @@
-package com.jsmirabal.viewintentsample.mvp.simplified
+package com.jsmirabal.viewintentsample.mvp.viewintentcallback
 
 import android.app.Activity
 import android.os.Bundle
@@ -7,7 +7,7 @@ import com.jsmirabal.viewintentsample.common.data.AnimeError
 import com.jsmirabal.viewintentsample.common.data.AnimeResult
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentSender
 import com.jsmirabal.viewintentsample.mvp.databinding.ActivityAnimeBinding
-import com.jsmirabal.viewintentsample.mvp.simplified.AnimeActivityContract.Intent.*
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

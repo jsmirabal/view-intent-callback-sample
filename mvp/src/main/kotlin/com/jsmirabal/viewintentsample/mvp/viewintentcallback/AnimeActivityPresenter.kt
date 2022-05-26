@@ -1,9 +1,9 @@
-package com.jsmirabal.viewintentsample.mvp.simplified
+package com.jsmirabal.viewintentsample.mvp.viewintentcallback
 
 import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
-import com.jsmirabal.viewintentsample.mvp.simplified.AnimeActivityContract.Intent.*
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.*
 import javax.inject.Inject
 
 class AnimeActivityPresenter @Inject constructor(
