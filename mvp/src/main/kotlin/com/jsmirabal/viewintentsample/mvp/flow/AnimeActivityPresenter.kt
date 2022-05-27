@@ -16,7 +16,7 @@ class AnimeActivityPresenter @Inject constructor(
     private val searchAnimeUseCase: SearchAnimeUseCase
 ) : AnimeActivityContract.Presenter {
 
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private val scope by lazy { CoroutineScope(Dispatchers.IO + SupervisorJob()) }
 
     override fun start() {
         observeSaveAnimeButtonClicks()

@@ -1,7 +1,7 @@
 package com.jsmirabal.viewintentsample.mvp.rx
 
-import android.app.Activity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.textChanges
 import com.jsmirabal.viewintentsample.common.data.AnimeError
@@ -12,10 +12,10 @@ import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AnimeActivity : Activity(), AnimeActivityContract.View {
+class AnimeActivity : AppCompatActivity(), AnimeActivityContract.View {
 
     @Inject
-    private lateinit var presenter: AnimeActivityContract.Presenter
+    lateinit var presenter: AnimeActivityContract.Presenter
 
     private val binding: ActivityAnimeBinding by lazy { ActivityAnimeBinding.inflate(layoutInflater) }
 
@@ -30,9 +30,11 @@ class AnimeActivity : Activity(), AnimeActivityContract.View {
         presenter.start()
     }
 
-    override fun getAnimeSaveButtonClicks(): Observable<Int> = binding.animeSaveButton.clicks().map { 101 }
+    override fun getAnimeSaveButtonClicks(): Observable<Int> =
+        binding.animeSaveButton.clicks().map { 101 }
 
-    override fun getAnimeSearchInputs(): Observable<String> = binding.animeSearch.textChanges().map { it.toString() }
+    override fun getAnimeSearchInputs(): Observable<String> =
+        binding.animeSearch.textChanges().map { it.toString() }
 
     override fun showAnimeList(result: AnimeResult) {
         // render anime list

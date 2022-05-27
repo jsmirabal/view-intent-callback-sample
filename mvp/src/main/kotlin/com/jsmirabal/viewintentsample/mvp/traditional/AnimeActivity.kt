@@ -1,8 +1,7 @@
 package com.jsmirabal.viewintentsample.mvp.traditional
 
-import android.app.Activity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.jsmirabal.viewintentsample.common.data.AnimeError
 import com.jsmirabal.viewintentsample.common.data.AnimeResult
@@ -11,10 +10,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AnimeActivity : Activity(), AnimeActivityContract.View {
+class AnimeActivity : AppCompatActivity(), AnimeActivityContract.View {
 
     @Inject
-    private lateinit var presenter: AnimeActivityContract.Presenter
+    lateinit var presenter: AnimeActivityContract.Presenter
 
     private val binding: ActivityAnimeBinding by lazy { ActivityAnimeBinding.inflate(layoutInflater) }
 
@@ -32,7 +31,7 @@ class AnimeActivity : Activity(), AnimeActivityContract.View {
 
     private fun initListeners() {
         binding.animeSearch.addTextChangedListener(
-            onTextChanged = { text, _, _, _ ->  presenter.searchAnime(text.toString())}
+            onTextChanged = { text, _, _, _ -> presenter.searchAnime(text.toString()) }
         )
         binding.animeSaveButton.setOnClickListener { presenter.onAnimeSelected(animeId = 101) }
     }

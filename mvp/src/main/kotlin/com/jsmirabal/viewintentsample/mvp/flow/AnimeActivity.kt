@@ -1,9 +1,9 @@
 package com.jsmirabal.viewintentsample.mvp.flow
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.jsmirabal.viewintentsample.common.data.AnimeError
 import com.jsmirabal.viewintentsample.common.data.AnimeResult
@@ -17,10 +17,10 @@ import kotlinx.coroutines.flow.onCompletion
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AnimeActivity : Activity(), AnimeActivityContract.View {
+class AnimeActivity : AppCompatActivity(), AnimeActivityContract.View {
 
     @Inject
-    private lateinit var presenter: AnimeActivityContract.Presenter
+    lateinit var presenter: AnimeActivityContract.Presenter
 
     private val binding: ActivityAnimeBinding by lazy { ActivityAnimeBinding.inflate(layoutInflater) }
 
