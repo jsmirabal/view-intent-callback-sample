@@ -1,7 +1,7 @@
 package com.jsmirabal.viewintentsample.mvp.viewintentcallback
 
-import com.jsmirabal.viewintentsample.common.data.AnimeError
-import com.jsmirabal.viewintentsample.common.data.AnimeResult
+import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
+import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntent
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling
