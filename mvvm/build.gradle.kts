@@ -58,7 +58,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
-
     testImplementation("io.mockk:mockk:1.10.6")
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")

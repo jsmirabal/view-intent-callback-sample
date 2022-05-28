@@ -4,25 +4,34 @@ import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCas
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentSender
-import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.*
-import io.mockk.*
+import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling
+import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.test.ViewIntentThrottlingTestUtil.mockViewIntentThrottling
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.LoadAnimes
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SearchAnime
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SelectAnime
+import io.mockk.every
+import io.mockk.justRun
+import io.mockk.mockk
+import io.mockk.slot
+import io.mockk.verify
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 
-internal class AnimeActivityPresenterTest : AnimeActivityThrottling by mockk() {
+internal class AnimeActivityPresenterTest {
 
     private val view = mockk<AnimeActivityContract.View>()
     private val fetchAnimeListUseCase = mockk<FetchAnimeListUseCase>()
     private val saveAnimeUseCase = mockk<SaveAnimeUseCase>()
     private val searchAnimeUseCase = mockk<SearchAnimeUseCase>()
+    private val viewIntentThrottling = mockk<ViewIntentThrottling<AnimeActivityContract.Intent>>()
 
     private fun runPresenter() = AnimeActivityPresenter(
         view,
         fetchAnimeListUseCase,
         saveAnimeUseCase,
         searchAnimeUseCase,
-        throttlingDelegate = this
+        viewIntentThrottling
     )
 
     @BeforeEach
@@ -31,21 +40,7 @@ internal class AnimeActivityPresenterTest : AnimeActivityThrottling by mockk() {
         every { saveAnimeUseCase(any()) } returns mockk()
         every { searchAnimeUseCase(any()) } returns mockk()
 
-        mockIntentThrottling()
-    }
-
-    private fun mockIntentThrottling() {
-        every {
-            any<AnimeActivityContract.Intent>().throttleFirst(any(), captureLambda())
-        } answers {
-            lambda<() -> Unit>().captured.invoke()
-        }
-
-        every {
-            any<AnimeActivityContract.Intent>().throttleLast(any(), captureLambda())
-        } answers {
-            lambda<() -> Unit>().captured.invoke()
-        }
+        mockViewIntentThrottling(viewIntentThrottling)
     }
 
     @ParameterizedTest

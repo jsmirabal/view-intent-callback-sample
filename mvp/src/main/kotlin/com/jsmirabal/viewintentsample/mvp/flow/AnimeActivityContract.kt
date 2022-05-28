@@ -1,7 +1,7 @@
 package com.jsmirabal.viewintentsample.mvp.flow
 
-import com.jsmirabal.viewintentsample.common.data.AnimeError
-import com.jsmirabal.viewintentsample.common.data.AnimeResult
+import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
+import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
 import kotlinx.coroutines.flow.Flow
 
 interface AnimeActivityContract {

@@ -33,8 +33,8 @@ class AnimeViewModel(
     private fun receive(intent: AnimeViewIntent) {
         when (intent) {
             AnimeViewIntent.LoadAnimes -> loadAnimeList()
-            is AnimeViewIntent.SearchAnime -> intent.throttleLast { searchAnime(intent.animeName) }
-            is AnimeViewIntent.SelectAnime -> intent.throttleFirst { onAnimeSelected(intent.animeId) }
+            is AnimeViewIntent.SearchAnime -> throttleLast(intent) { searchAnime(intent.animeName) }
+            is AnimeViewIntent.SelectAnime -> throttleFirst(intent) { onAnimeSelected(intent.animeId) }
         }
     }
 

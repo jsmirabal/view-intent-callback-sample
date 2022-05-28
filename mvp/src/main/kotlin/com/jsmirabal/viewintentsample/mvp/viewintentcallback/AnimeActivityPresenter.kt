@@ -24,8 +24,8 @@ class AnimeActivityPresenter @Inject constructor(
     private fun receive(intent: AnimeActivityContract.Intent) {
         when (intent) {
             LoadAnimes -> fetchAnimes()
-            is SearchAnime -> intent.throttleLast { searchAnime(intent.animeName) }
-            is SelectAnime -> intent.throttleFirst { onAnimeSelected(intent.animeId) }
+            is SearchAnime -> throttleLast(intent) { searchAnime(intent.animeName) }
+            is SelectAnime -> throttleFirst(intent) { onAnimeSelected(intent.animeId) }
         }
     }
 

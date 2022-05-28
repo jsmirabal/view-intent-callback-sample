@@ -9,12 +9,14 @@ private const val DEFAULT_THROTTLE_TIME_MILLIS = 200L
 
 interface ViewIntentThrottling<T : ViewIntent> {
 
-    fun T.throttleFirst(
+    fun throttleFirst(
+        intent: T,
         throttleTimeInMillis: Long = DEFAULT_THROTTLE_TIME_MILLIS,
         block: () -> Unit
     )
 
-    fun T.throttleLast(
+    fun throttleLast(
+        intent: T,
         throttleTimeInMillis: Long = DEFAULT_THROTTLE_TIME_MILLIS,
         block: () -> Unit
     )
@@ -25,12 +27,12 @@ class ViewIntentThrottlingImpl<T : ViewIntent> : ViewIntentThrottling<T> {
     private val triggerThrottleFirst by lazy { ThrottleFirst<T>() }
     private val triggerThrottleLast by lazy { ThrottleLast<T>() }
 
-    override fun T.throttleFirst(throttleTimeInMillis: Long, block: () -> Unit) {
-        triggerThrottleFirst(intent = this, throttleTimeInMillis, block)
+    override fun throttleFirst(intent: T, throttleTimeInMillis: Long, block: () -> Unit) {
+        triggerThrottleFirst(intent, throttleTimeInMillis, block)
     }
 
-    override fun T.throttleLast(throttleTimeInMillis: Long, block: () -> Unit) {
-        triggerThrottleLast(intent = this, throttleTimeInMillis, block)
+    override fun throttleLast(intent: T, throttleTimeInMillis: Long, block: () -> Unit) {
+        triggerThrottleLast(intent, throttleTimeInMillis, block)
     }
 }
 
