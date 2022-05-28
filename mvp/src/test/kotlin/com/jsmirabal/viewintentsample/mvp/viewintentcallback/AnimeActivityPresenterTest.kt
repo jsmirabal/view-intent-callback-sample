@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.EnumSource
 
-internal class AnimeActivityPresenterTest {
+internal class AnimeActivityPresenterTest : AnimeActivityThrottling by mockk() {
 
     private val view = mockk<AnimeActivityContract.View>()
     private val fetchAnimeListUseCase = mockk<FetchAnimeListUseCase>()
@@ -21,7 +21,8 @@ internal class AnimeActivityPresenterTest {
         view,
         fetchAnimeListUseCase,
         saveAnimeUseCase,
-        searchAnimeUseCase
+        searchAnimeUseCase,
+        throttlingDelegate = this
     )
 
     @BeforeEach
@@ -29,6 +30,22 @@ internal class AnimeActivityPresenterTest {
         every { fetchAnimeListUseCase() } returns mockk()
         every { saveAnimeUseCase(any()) } returns mockk()
         every { searchAnimeUseCase(any()) } returns mockk()
+
+        mockIntentThrottling()
+    }
+
+    private fun mockIntentThrottling() {
+        every {
+            any<AnimeActivityContract.Intent>().throttleFirst(any(), captureLambda())
+        } answers {
+            lambda<() -> Unit>().captured.invoke()
+        }
+
+        every {
+            any<AnimeActivityContract.Intent>().throttleLast(any(), captureLambda())
+        } answers {
+            lambda<() -> Unit>().captured.invoke()
+        }
     }
 
     @ParameterizedTest

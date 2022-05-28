@@ -4,6 +4,9 @@ import com.jsmirabal.viewintentsample.common.data.AnimeError
 import com.jsmirabal.viewintentsample.common.data.AnimeResult
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntent
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
+import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling
+
+typealias AnimeActivityThrottling = ViewIntentThrottling<AnimeActivityContract.Intent>
 
 interface AnimeActivityContract {
 
