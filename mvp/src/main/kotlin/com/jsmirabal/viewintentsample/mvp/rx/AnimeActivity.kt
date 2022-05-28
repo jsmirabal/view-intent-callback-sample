@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.textChanges
-import com.jsmirabal.viewintentsample.common.data.AnimeError
-import com.jsmirabal.viewintentsample.common.data.AnimeResult
+import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
+import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
 import com.jsmirabal.viewintentsample.mvp.databinding.ActivityAnimeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.core.Observable

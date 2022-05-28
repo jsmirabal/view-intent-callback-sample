@@ -1,6 +1,8 @@
 package com.jsmirabal.viewintentsample.common.data
 
 import com.jsmirabal.viewintentsample.common.domain.core.Either
+import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
+import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
 
 class AnimeRepository {
 
@@ -19,6 +21,3 @@ class AnimeRepository {
         return Either.Success(AnimeResult("list"))
     }
 }
-
-data class AnimeResult(val animeInfo: String)
-data class AnimeError(val animeError: String)

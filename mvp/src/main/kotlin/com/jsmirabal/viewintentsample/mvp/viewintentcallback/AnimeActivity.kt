@@ -3,11 +3,13 @@ package com.jsmirabal.viewintentsample.mvp.viewintentcallback
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import com.jsmirabal.viewintentsample.common.data.AnimeError
-import com.jsmirabal.viewintentsample.common.data.AnimeResult
+import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
+import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentSender
 import com.jsmirabal.viewintentsample.mvp.databinding.ActivityAnimeBinding
-import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.*
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.LoadAnimes
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SearchAnime
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SelectAnime
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,7 +21,7 @@ class AnimeActivity : AppCompatActivity(), AnimeActivityContract.View {
 
     private val binding: ActivityAnimeBinding by lazy { ActivityAnimeBinding.inflate(layoutInflater) }
 
-    override var sender: ViewIntentSender<AnimeActivityContract.Intent> = {  }
+    override var sender: ViewIntentSender<AnimeActivityContract.Intent> = { }
 
     override fun onIntent(sender: ViewIntentSender<AnimeActivityContract.Intent>) {
         this.sender = sender
@@ -39,7 +41,7 @@ class AnimeActivity : AppCompatActivity(), AnimeActivityContract.View {
 
     private fun initListeners() {
         binding.animeSearch.addTextChangedListener(
-            onTextChanged = { text, _, _, _ ->  sender(SearchAnime(text.toString()))}
+            onTextChanged = { text, _, _, _ -> sender(SearchAnime(text.toString())) }
         )
         binding.animeSaveButton.setOnClickListener { sender(SelectAnime(animeId = 101)) }
     }
