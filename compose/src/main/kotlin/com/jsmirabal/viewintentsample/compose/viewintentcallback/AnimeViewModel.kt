@@ -1,4 +1,4 @@
-package com.jsmirabal.viewintentsample.mvvm.viewintentcallback
+package com.jsmirabal.viewintentsample.compose.viewintentcallback
 
 import androidx.lifecycle.ViewModel
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
@@ -10,11 +10,9 @@ import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntent
 import com.jsmirabal.viewintentsample.common.viewintentcallback.mvvm.ViewIntentCallback
 import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling
 import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottlingImpl
-import dagger.hilt.android.scopes.ViewModelScoped
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
-@ViewModelScoped
 class AnimeViewModel(
     onIntent: ViewIntentCallback.Receiver<AnimeViewIntent>,
     private val fetchAnimeListUseCase: FetchAnimeListUseCase,
@@ -23,8 +21,8 @@ class AnimeViewModel(
     throttlingDelegate: ViewIntentThrottling<AnimeViewIntent> = ViewIntentThrottlingImpl()
 ) : ViewModel(), ViewIntentThrottling<AnimeViewIntent> by throttlingDelegate {
 
-    private val _animeViewState = MutableSharedFlow<AnimeViewState>()
-    val animeViewState: SharedFlow<AnimeViewState> = _animeViewState
+    private val _animeViewState = MutableStateFlow<AnimeViewState>(AnimeViewState.Initial)
+    val animeViewState: StateFlow<AnimeViewState> = _animeViewState
 
     init {
         onIntent(::receive)
@@ -58,6 +56,7 @@ class AnimeViewModel(
 }
 
 sealed interface AnimeViewState {
+    object Initial : AnimeViewState
     data class ShowAnimeList(val result: AnimeResult) : AnimeViewState
     data class ShowSearchView(val result: AnimeResult) : AnimeViewState
     data class ShowError(val error: AnimeError) : AnimeViewState
