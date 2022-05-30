@@ -10,6 +10,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
 import com.jsmirabal.viewintentsample.common.viewintentcallback.mvvm.ViewIntentCallback
+import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling.Type.THROTTLE_FIRST
+import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling.Type.THROTTLE_LAST
 import com.jsmirabal.viewintentsample.mvvm.databinding.ActivityAnimeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -53,11 +55,17 @@ class AnimeActivity : AppCompatActivity() {
     private fun initListeners() {
         binding.animeSearch.addTextChangedListener(
             onTextChanged = { text, _, _, _ ->
-                sender.send(AnimeViewIntent.SearchAnime(text.toString()))
+                sender.send(
+                    intent = AnimeViewIntent.SearchAnime(text.toString()),
+                    throttlingType = THROTTLE_LAST
+                )
             }
         )
         binding.animeSaveButton.setOnClickListener {
-            sender.send(AnimeViewIntent.SelectAnime(animeId = 101))
+            sender.send(
+                intent = AnimeViewIntent.SelectAnime(animeId = 101),
+                throttlingType = THROTTLE_FIRST
+            )
         }
     }
 

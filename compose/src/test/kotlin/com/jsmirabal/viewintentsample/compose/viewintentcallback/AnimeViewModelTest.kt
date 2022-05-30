@@ -25,14 +25,12 @@ internal class AnimeViewModelTest {
     private val saveAnimeUseCase = mockk<SaveAnimeUseCase>()
     private val searchAnimeUseCase = mockk<SearchAnimeUseCase>()
     private val receiver = mockk<ViewIntentCallback.Receiver<AnimeViewIntent>>()
-    private val viewIntentThrottling = mockk<ViewIntentThrottling<AnimeViewIntent>>()
 
     private fun runViewModel() = AnimeViewModel(
         receiver,
         fetchAnimeListUseCase,
         saveAnimeUseCase,
-        searchAnimeUseCase,
-        viewIntentThrottling
+        searchAnimeUseCase
     )
 
     @BeforeEach
@@ -40,8 +38,6 @@ internal class AnimeViewModelTest {
         every { fetchAnimeListUseCase() } returns mockk()
         every { saveAnimeUseCase(any()) } returns mockk()
         every { searchAnimeUseCase(any()) } returns mockk()
-
-        mockViewIntentThrottling(viewIntentThrottling)
     }
 
     @ParameterizedTest

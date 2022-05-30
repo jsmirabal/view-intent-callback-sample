@@ -8,33 +8,30 @@ import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntent
 import com.jsmirabal.viewintentsample.common.viewintentcallback.mvvm.ViewIntentCallback
-import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling
-import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottlingImpl
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
 @ViewModelScoped
 class AnimeViewModel(
-    onIntent: ViewIntentCallback.Receiver<AnimeViewIntent>,
+    onViewIntent: ViewIntentCallback.Receiver<AnimeViewIntent>,
     private val fetchAnimeListUseCase: FetchAnimeListUseCase,
     private val saveAnimeUseCase: SaveAnimeUseCase,
-    private val searchAnimeUseCase: SearchAnimeUseCase,
-    throttlingDelegate: ViewIntentThrottling<AnimeViewIntent> = ViewIntentThrottlingImpl()
-) : ViewModel(), ViewIntentThrottling<AnimeViewIntent> by throttlingDelegate {
+    private val searchAnimeUseCase: SearchAnimeUseCase
+) : ViewModel() {
 
     private val _animeViewState = MutableSharedFlow<AnimeViewState>()
     val animeViewState: SharedFlow<AnimeViewState> = _animeViewState
 
     init {
-        onIntent(::receive)
+        onViewIntent(::receive)
     }
 
     private fun receive(intent: AnimeViewIntent) {
         when (intent) {
             AnimeViewIntent.LoadAnimes -> loadAnimeList()
-            is AnimeViewIntent.SearchAnime -> throttleLast(intent) { searchAnime(intent.animeName) }
-            is AnimeViewIntent.SelectAnime -> throttleFirst(intent) { onAnimeSelected(intent.animeId) }
+            is AnimeViewIntent.SearchAnime -> searchAnime(intent.animeName)
+            is AnimeViewIntent.SelectAnime -> onAnimeSelected(intent.animeId)
         }
     }
 

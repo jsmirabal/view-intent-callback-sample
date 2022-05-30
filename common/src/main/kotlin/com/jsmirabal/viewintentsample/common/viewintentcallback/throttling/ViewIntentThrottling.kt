@@ -20,9 +20,15 @@ interface ViewIntentThrottling<T : ViewIntent> {
         throttleTimeInMillis: Long = DEFAULT_THROTTLE_TIME_MILLIS,
         block: () -> Unit
     )
+
+    enum class Type {
+        THROTTLE_FIRST,
+        THROTTLE_LAST,
+        NO_THROTTLING
+    }
 }
 
-class ViewIntentThrottlingImpl<T : ViewIntent> : ViewIntentThrottling<T> {
+internal class ViewIntentThrottlingImpl<T : ViewIntent> : ViewIntentThrottling<T> {
 
     private val triggerThrottleFirst by lazy { ThrottleFirst<T>() }
     private val triggerThrottleLast by lazy { ThrottleLast<T>() }

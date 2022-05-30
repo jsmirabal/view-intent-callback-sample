@@ -12,6 +12,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import com.jsmirabal.viewintentsample.common.viewintentcallback.mvvm.ViewIntentCallback
+import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling.Type.THROTTLE_FIRST
+import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling.Type.THROTTLE_LAST
 import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.LoadAnimes
 import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.SearchAnime
 import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.SelectAnime
@@ -28,13 +30,23 @@ fun AnimeScreen(
     ) {
         TextField(
             value = "Anime Search",
-            onValueChange = { sender.send(SearchAnime(it)) },
+            onValueChange = {
+                sender.send(
+                    intent = SearchAnime(it),
+                    throttlingType = THROTTLE_LAST
+                )
+            },
             modifier = Modifier
                 .fillMaxSize()
                 .wrapContentHeight()
         )
         Button(
-            onClick = { sender.send(SelectAnime(101)) },
+            onClick = {
+                sender.send(
+                    intent = SelectAnime(101),
+                    throttlingType = THROTTLE_FIRST
+                )
+            },
             modifier = Modifier
                 .wrapContentWidth()
                 .wrapContentHeight()
