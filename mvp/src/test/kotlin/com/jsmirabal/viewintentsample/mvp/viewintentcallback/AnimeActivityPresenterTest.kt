@@ -4,8 +4,7 @@ import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCas
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentSender
-import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling
-import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.test.ViewIntentThrottlingTestUtil.mockViewIntentThrottling
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.LoadAnimes
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SearchAnime
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SelectAnime
@@ -24,14 +23,14 @@ internal class AnimeActivityPresenterTest {
     private val fetchAnimeListUseCase = mockk<FetchAnimeListUseCase>()
     private val saveAnimeUseCase = mockk<SaveAnimeUseCase>()
     private val searchAnimeUseCase = mockk<SearchAnimeUseCase>()
-    private val viewIntentThrottling = mockk<ViewIntentThrottling<AnimeActivityContract.Intent>>()
+    private val onViewIntent = mockk<ViewIntentCallback.Receiver<AnimeActivityContract.Intent>>()
 
     private fun runPresenter() = AnimeActivityPresenter(
+        onViewIntent,
         view,
         fetchAnimeListUseCase,
         saveAnimeUseCase,
-        searchAnimeUseCase,
-        viewIntentThrottling
+        searchAnimeUseCase
     )
 
     @BeforeEach
@@ -39,8 +38,6 @@ internal class AnimeActivityPresenterTest {
         every { fetchAnimeListUseCase() } returns mockk()
         every { saveAnimeUseCase(any()) } returns mockk()
         every { searchAnimeUseCase(any()) } returns mockk()
-
-        mockViewIntentThrottling(viewIntentThrottling)
     }
 
     @ParameterizedTest
@@ -48,7 +45,7 @@ internal class AnimeActivityPresenterTest {
     fun `WHEN a view intent is received THEN verify the expected outcome`(scenario: PresenterViewIntentScenario) {
         val senderSlot = slot<ViewIntentSender<AnimeActivityContract.Intent>>()
 
-        justRun { view.onIntent(capture(senderSlot)) }
+        justRun { onViewIntent(capture(senderSlot)) }
 
         runPresenter()
 

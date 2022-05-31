@@ -3,10 +3,6 @@ package com.jsmirabal.viewintentsample.mvp.viewintentcallback
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntent
-import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
-import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling
-
-typealias AnimeActivityThrottling = ViewIntentThrottling<AnimeActivityContract.Intent>
 
 interface AnimeActivityContract {
 
@@ -16,7 +12,7 @@ interface AnimeActivityContract {
         data class SelectAnime(val animeId: Int) : Intent
     }
 
-    interface View : ViewIntentCallback<Intent> {
+    interface View {
         fun showAnimeList(result: AnimeResult)
         fun showSearchView(result: AnimeResult)
         fun showError(error: AnimeError)

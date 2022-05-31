@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
-import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentSender
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
+import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling.Type.THROTTLE_FIRST
+import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling.Type.THROTTLE_LAST
 import com.jsmirabal.viewintentsample.mvp.databinding.ActivityAnimeBinding
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.LoadAnimes
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SearchAnime
@@ -21,11 +23,8 @@ class AnimeActivity : AppCompatActivity(), AnimeActivityContract.View {
 
     private val binding: ActivityAnimeBinding by lazy { ActivityAnimeBinding.inflate(layoutInflater) }
 
-    override var sender: ViewIntentSender<AnimeActivityContract.Intent> = { }
-
-    override fun onIntent(sender: ViewIntentSender<AnimeActivityContract.Intent>) {
-        this.sender = sender
-    }
+    @Inject
+    lateinit var sender: ViewIntentCallback.Sender<AnimeActivityContract.Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,15 +34,25 @@ class AnimeActivity : AppCompatActivity(), AnimeActivityContract.View {
     override fun onStart() {
         super.onStart()
 
-        sender(LoadAnimes)
+        sender.send(LoadAnimes)
         initListeners()
     }
 
     private fun initListeners() {
         binding.animeSearch.addTextChangedListener(
-            onTextChanged = { text, _, _, _ -> sender(SearchAnime(text.toString())) }
+            onTextChanged = { text, _, _, _ ->
+                sender.send(
+                    intent = SearchAnime(text.toString()),
+                    throttlingType = THROTTLE_LAST
+                )
+            }
         )
-        binding.animeSaveButton.setOnClickListener { sender(SelectAnime(animeId = 101)) }
+        binding.animeSaveButton.setOnClickListener {
+            sender.send(
+                intent = SelectAnime(animeId = 101),
+                throttlingType = THROTTLE_FIRST
+            )
+        }
     }
 
     override fun showAnimeList(result: AnimeResult) {

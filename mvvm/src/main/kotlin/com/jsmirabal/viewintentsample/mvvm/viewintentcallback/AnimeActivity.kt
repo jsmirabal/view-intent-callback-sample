@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
-import com.jsmirabal.viewintentsample.common.viewintentcallback.mvvm.ViewIntentCallback
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling.Type.THROTTLE_FIRST
 import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling.Type.THROTTLE_LAST
 import com.jsmirabal.viewintentsample.mvvm.databinding.ActivityAnimeBinding

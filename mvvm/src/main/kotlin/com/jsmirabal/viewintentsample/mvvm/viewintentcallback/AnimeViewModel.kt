@@ -7,7 +7,7 @@ import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCas
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntent
-import com.jsmirabal.viewintentsample.common.viewintentcallback.mvvm.ViewIntentCallback
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

@@ -4,7 +4,7 @@ import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCas
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentSender
-import com.jsmirabal.viewintentsample.common.viewintentcallback.mvvm.ViewIntentCallback
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import com.jsmirabal.viewintentsample.mvvm.viewintentcallback.AnimeViewIntent.LoadAnimes
 import com.jsmirabal.viewintentsample.mvvm.viewintentcallback.AnimeViewIntent.SearchAnime
 import com.jsmirabal.viewintentsample.mvvm.viewintentcallback.AnimeViewIntent.SelectAnime

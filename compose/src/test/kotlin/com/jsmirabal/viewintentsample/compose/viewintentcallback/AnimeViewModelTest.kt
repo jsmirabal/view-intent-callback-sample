@@ -4,9 +4,7 @@ import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCas
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentSender
-import com.jsmirabal.viewintentsample.common.viewintentcallback.mvvm.ViewIntentCallback
-import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling
-import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.test.ViewIntentThrottlingTestUtil.mockViewIntentThrottling
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.LoadAnimes
 import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.SearchAnime
 import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.SelectAnime

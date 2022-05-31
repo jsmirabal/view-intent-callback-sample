@@ -3,29 +3,29 @@ package com.jsmirabal.viewintentsample.mvp.viewintentcallback
 import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
-import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottlingImpl
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.LoadAnimes
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SearchAnime
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SelectAnime
 import javax.inject.Inject
 
 class AnimeActivityPresenter @Inject constructor(
+    onViewIntent: ViewIntentCallback.Receiver<AnimeActivityContract.Intent>,
     private val view: AnimeActivityContract.View,
     private val fetchAnimeListUseCase: FetchAnimeListUseCase,
     private val saveAnimeUseCase: SaveAnimeUseCase,
-    private val searchAnimeUseCase: SearchAnimeUseCase,
-    throttlingDelegate: AnimeActivityThrottling = ViewIntentThrottlingImpl()
-) : AnimeActivityContract.Presenter, AnimeActivityThrottling by throttlingDelegate {
+    private val searchAnimeUseCase: SearchAnimeUseCase
+) : AnimeActivityContract.Presenter {
 
     init {
-        view.onIntent(::receive)
+        onViewIntent(::receive)
     }
 
     private fun receive(intent: AnimeActivityContract.Intent) {
         when (intent) {
             LoadAnimes -> fetchAnimes()
-            is SearchAnime -> throttleLast(intent) { searchAnime(intent.animeName) }
-            is SelectAnime -> throttleFirst(intent) { onAnimeSelected(intent.animeId) }
+            is SearchAnime -> searchAnime(intent.animeName)
+            is SelectAnime -> onAnimeSelected(intent.animeId)
         }
     }
 
