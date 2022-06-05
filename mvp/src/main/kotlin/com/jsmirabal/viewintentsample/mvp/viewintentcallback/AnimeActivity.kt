@@ -6,8 +6,8 @@ import androidx.core.widget.addTextChangedListener
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeError
 import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
-import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling.Type.THROTTLE_FIRST
-import com.jsmirabal.viewintentsample.common.viewintentcallback.throttling.ViewIntentThrottling.Type.THROTTLE_LAST
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentThrottling.Type.THROTTLE_FIRST
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentThrottling.Type.THROTTLE_LAST
 import com.jsmirabal.viewintentsample.mvp.databinding.ActivityAnimeBinding
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.LoadAnimes
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SearchAnime

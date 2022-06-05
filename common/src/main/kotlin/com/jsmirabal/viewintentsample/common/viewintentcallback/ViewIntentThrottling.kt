@@ -1,11 +1,10 @@
-package com.jsmirabal.viewintentsample.common.viewintentcallback.throttling
+package com.jsmirabal.viewintentsample.common.viewintentcallback
 
-import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntent
 import java.util.Timer
 import java.util.TimerTask
 import kotlin.concurrent.schedule
 
-private const val DEFAULT_THROTTLE_TIME_MILLIS = 200L
+internal const val DEFAULT_THROTTLE_TIME_MILLIS = 200L
 
 interface ViewIntentThrottling<T : ViewIntent> {
 
