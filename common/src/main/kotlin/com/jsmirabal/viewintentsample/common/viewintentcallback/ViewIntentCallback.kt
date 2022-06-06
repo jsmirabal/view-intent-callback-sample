@@ -6,6 +6,8 @@ import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentThrott
 
 interface ViewIntent
 
+typealias ViewIntentBinder<T> = (T) -> Unit
+
 interface ViewIntentCallback {
 
     interface Sender<T : ViewIntent> {
@@ -17,7 +19,7 @@ interface ViewIntentCallback {
     }
 
     interface Receiver<T : ViewIntent> {
-        operator fun invoke(sender: (T) -> Unit)
+        operator fun invoke(receive: ViewIntentBinder<T>)
     }
 }
 
@@ -26,10 +28,10 @@ class ViewIntentCallbackImpl<T : ViewIntent> :
     ViewIntentCallback.Receiver<T>,
     ViewIntentThrottling<T> by ViewIntentThrottlingImpl() {
 
-    private var sender: (T) -> Unit = { }
+    private var _send: ViewIntentBinder<T> = { }
 
-    override operator fun invoke(sender: (T) -> Unit) {
-        this.sender = sender
+    override operator fun invoke(receive: ViewIntentBinder<T>) {
+        _send = receive
     }
 
     override fun send(
@@ -38,9 +40,9 @@ class ViewIntentCallbackImpl<T : ViewIntent> :
         throttleTimeInMillis: Long
     ) {
         when (throttlingType) {
-            THROTTLE_FIRST -> throttleFirst(intent, throttleTimeInMillis) { sender(intent) }
-            THROTTLE_LAST -> throttleLast(intent, throttleTimeInMillis) { sender(intent) }
-            NO_THROTTLING -> sender(intent)
+            THROTTLE_FIRST -> throttleFirst(intent, throttleTimeInMillis) { _send(intent) }
+            THROTTLE_LAST -> throttleLast(intent, throttleTimeInMillis) { _send(intent) }
+            NO_THROTTLING -> _send(intent)
         }
     }
 }

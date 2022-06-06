@@ -26,8 +26,12 @@ class AnimeActivity : AppCompatActivity(), AnimeActivityContract.View {
 
     override fun onStart() {
         super.onStart()
-
         presenter.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.stop()
     }
 
     override fun getAnimeSaveButtonClicks(): Observable<Int> =
