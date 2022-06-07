@@ -8,9 +8,11 @@ import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntent
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
+@HiltViewModel
 class AnimeViewModel(
     onViewIntent: ViewIntentCallback.Receiver<AnimeViewIntent>,
     private val fetchAnimeListUseCase: FetchAnimeListUseCase,
