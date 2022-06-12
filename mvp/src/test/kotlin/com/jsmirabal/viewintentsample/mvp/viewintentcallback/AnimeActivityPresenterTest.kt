@@ -3,7 +3,7 @@ package com.jsmirabal.viewintentsample.mvp.viewintentcallback
 import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
-import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentSender
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentBinder
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.LoadAnimes
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SearchAnime
@@ -43,7 +43,7 @@ internal class AnimeActivityPresenterTest {
     @ParameterizedTest
     @EnumSource(PresenterViewIntentScenario::class)
     fun `WHEN a view intent is received THEN verify the expected outcome`(scenario: PresenterViewIntentScenario) {
-        val senderSlot = slot<ViewIntentSender<AnimeActivityContract.Intent>>()
+        val senderSlot = slot<ViewIntentBinder<AnimeActivityContract.Intent>>()
 
         justRun { onViewIntent(capture(senderSlot)) }
 
