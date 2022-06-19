@@ -9,7 +9,7 @@ interface AnimeActivityContract {
     sealed interface Intent : ViewIntent {
         object LoadAnimes : Intent
         data class SearchAnime(val animeName: String) : Intent
-        data class SelectAnime(val animeId: Int) : Intent
+        data class SaveAnime(val animeId: Int) : Intent
     }
 
     interface View {

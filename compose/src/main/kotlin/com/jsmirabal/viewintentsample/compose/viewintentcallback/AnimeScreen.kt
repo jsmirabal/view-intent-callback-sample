@@ -16,7 +16,7 @@ import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentThrott
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentThrottling.Type.THROTTLE_LAST
 import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.LoadAnimes
 import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.SearchAnime
-import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.SelectAnime
+import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.SaveAnime
 
 @Composable
 fun AnimeScreen(
@@ -43,7 +43,7 @@ fun AnimeScreen(
         Button(
             onClick = {
                 sender.send(
-                    intent = SelectAnime(101),
+                    intent = SaveAnime(101),
                     throttlingType = THROTTLE_FIRST
                 )
             },

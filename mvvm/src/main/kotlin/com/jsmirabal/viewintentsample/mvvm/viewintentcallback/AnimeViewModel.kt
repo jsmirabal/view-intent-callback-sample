@@ -8,11 +8,9 @@ import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntent
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 
-@HiltViewModel
 class AnimeViewModel(
     onViewIntent: ViewIntentCallback.Receiver<AnimeViewIntent>,
     private val fetchAnimeListUseCase: FetchAnimeListUseCase,
@@ -31,7 +29,7 @@ class AnimeViewModel(
         when (intent) {
             AnimeViewIntent.LoadAnimes -> loadAnimeList()
             is AnimeViewIntent.SearchAnime -> searchAnime(intent.animeName)
-            is AnimeViewIntent.SelectAnime -> onAnimeSelected(intent.animeId)
+            is AnimeViewIntent.SaveAnime -> saveAnime(intent.animeId)
         }
     }
 
@@ -49,7 +47,7 @@ class AnimeViewModel(
         )
     }
 
-    private fun onAnimeSelected(animeId: Int) {
+    private fun saveAnime(animeId: Int) {
         saveAnimeUseCase(animeId)
     }
 }
@@ -63,5 +61,5 @@ sealed interface AnimeViewState {
 sealed interface AnimeViewIntent : ViewIntent {
     object LoadAnimes : AnimeViewIntent
     data class SearchAnime(val animeName: String) : AnimeViewIntent
-    data class SelectAnime(val animeId: Int) : AnimeViewIntent
+    data class SaveAnime(val animeId: Int) : AnimeViewIntent
 }

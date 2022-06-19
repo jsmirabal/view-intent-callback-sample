@@ -63,7 +63,7 @@ class AnimeActivity : AppCompatActivity() {
         )
         binding.animeSaveButton.setOnClickListener {
             sender.send(
-                intent = AnimeViewIntent.SelectAnime(animeId = 101),
+                intent = AnimeViewIntent.SaveAnime(animeId = 101),
                 throttlingType = THROTTLE_FIRST
             )
         }

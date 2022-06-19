@@ -29,7 +29,7 @@ class AnimeActivityPresenter @Inject constructor(
     private fun observeSaveAnimeButtonClicks() {
         view.getAnimeSaveButtonClicks()
             .throttleFirst(200, TimeUnit.MILLISECONDS)
-            .subscribe { onAnimeSelected(it) }
+            .subscribe { saveAnime(it) }
             .also { disposables.add(it) }
     }
 
@@ -54,7 +54,7 @@ class AnimeActivityPresenter @Inject constructor(
         )
     }
 
-    private fun onAnimeSelected(animeId: Int) {
+    private fun saveAnime(animeId: Int) {
         saveAnimeUseCase(animeId)
     }
 }

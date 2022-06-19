@@ -14,6 +14,6 @@ interface AnimeActivityContract {
     interface Presenter {
         fun start()
         fun searchAnime(animeName: String)
-        fun onAnimeSelected(animeId: Int)
+        fun saveAnime(animeId: Int)
     }
 }

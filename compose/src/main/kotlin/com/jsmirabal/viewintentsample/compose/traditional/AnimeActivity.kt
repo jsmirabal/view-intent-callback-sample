@@ -20,7 +20,7 @@ class AnimeActivity : AppCompatActivity() {
                 uiState = viewModel.animeViewState.collectAsState(),
                 onInitialState = { viewModel.loadAnimeList() },
                 onAnimeSearchTextChanged = { viewModel.searchAnime(it) },
-                onAnimeSelected = { viewModel.onAnimeSelected(it) }
+                onAnimeSaveButtonClicked = { viewModel.saveAnime(it) }
             )
         }
     }

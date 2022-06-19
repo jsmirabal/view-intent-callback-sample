@@ -28,10 +28,10 @@ internal class AnimeViewModelTest {
     }
 
     @Test
-    fun `WHEN onAnimeSelected is called THEN save anime`() {
+    fun `WHEN saveAnime is called THEN save anime`() {
         val animeId = 101
 
-        viewModel.onAnimeSelected(animeId)
+        viewModel.saveAnime(animeId)
 
         verify { saveAnimeUseCase(animeId) }
     }

@@ -3,11 +3,11 @@ package com.jsmirabal.viewintentsample.compose.viewintentcallback
 import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
-import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentSender
+import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentBinder
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.LoadAnimes
 import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.SearchAnime
-import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.SelectAnime
+import com.jsmirabal.viewintentsample.compose.viewintentcallback.AnimeViewIntent.SaveAnime
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
@@ -41,7 +41,7 @@ internal class AnimeViewModelTest {
     @ParameterizedTest
     @EnumSource(AnimeViewIntentScenario::class)
     fun `WHEN a view intent is received THEN verify the expected outcome`(scenario: AnimeViewIntentScenario) {
-        val senderSlot = slot<ViewIntentSender<AnimeViewIntent>>()
+        val senderSlot = slot<ViewIntentBinder<AnimeViewIntent>>()
 
         justRun { receiver(capture(senderSlot)) }
 
@@ -53,7 +53,7 @@ internal class AnimeViewModelTest {
             when (scenario.intent) {
                 LoadAnimes -> fetchAnimeListUseCase()
                 is SearchAnime -> searchAnimeUseCase(scenario.intent.animeName)
-                is SelectAnime -> saveAnimeUseCase(scenario.intent.animeId)
+                is SaveAnime -> saveAnimeUseCase(scenario.intent.animeId)
             }
         }
     }
@@ -61,6 +61,6 @@ internal class AnimeViewModelTest {
     enum class AnimeViewIntentScenario(val intent: AnimeViewIntent) {
         LOAD_ANIMES(LoadAnimes),
         SEARCH_ANIME(SearchAnime(animeName = "")),
-        SELECT_ANIME(SelectAnime(animeId = 101))
+        SAVE_ANIME(SaveAnime(animeId = 101))
     }
 }

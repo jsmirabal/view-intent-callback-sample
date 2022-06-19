@@ -26,7 +26,7 @@ class AnimeActivityPresenter @Inject constructor(
         )
     }
 
-    override fun onAnimeSelected(animeId: Int) {
+    override fun saveAnime(animeId: Int) {
         saveAnimeUseCase(animeId)
     }
 }

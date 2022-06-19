@@ -31,10 +31,10 @@ internal class AnimeActivityPresenterTest {
     }
 
     @Test
-    fun `WHEN onAnimeSelected is called THEN save anime`() {
+    fun `WHEN saveAnime is called THEN save anime`() {
         val animeId = 101
 
-        presenter.onAnimeSelected(animeId)
+        presenter.saveAnime(animeId)
 
         verify { saveAnimeUseCase(animeId) }
     }

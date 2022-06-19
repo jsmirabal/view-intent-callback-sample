@@ -11,7 +11,7 @@ import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentThrott
 import com.jsmirabal.viewintentsample.mvp.databinding.ActivityAnimeBinding
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.LoadAnimes
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SearchAnime
-import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SelectAnime
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SaveAnime
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -49,7 +49,7 @@ class AnimeActivity : AppCompatActivity(), AnimeActivityContract.View {
         )
         binding.animeSaveButton.setOnClickListener {
             sender.send(
-                intent = SelectAnime(animeId = 101),
+                intent = SaveAnime(animeId = 101),
                 throttlingType = THROTTLE_FIRST
             )
         }

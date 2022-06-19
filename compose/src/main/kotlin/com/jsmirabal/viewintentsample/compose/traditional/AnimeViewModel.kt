@@ -6,11 +6,9 @@ import com.jsmirabal.viewintentsample.common.domain.model.AnimeResult
 import com.jsmirabal.viewintentsample.common.domain.usecase.FetchAnimeListUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SaveAnimeUseCase
 import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-@HiltViewModel
 class AnimeViewModel(
     private val fetchAnimeListUseCase: FetchAnimeListUseCase,
     private val saveAnimeUseCase: SaveAnimeUseCase,
@@ -34,7 +32,7 @@ class AnimeViewModel(
         )
     }
 
-    fun onAnimeSelected(animeId: Int) {
+    fun saveAnime(animeId: Int) {
         saveAnimeUseCase(animeId)
     }
 }

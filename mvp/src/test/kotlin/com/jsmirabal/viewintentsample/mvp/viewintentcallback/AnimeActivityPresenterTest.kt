@@ -7,7 +7,7 @@ import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentBinder
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.LoadAnimes
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SearchAnime
-import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SelectAnime
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SaveAnime
 import io.mockk.every
 import io.mockk.justRun
 import io.mockk.mockk
@@ -55,7 +55,7 @@ internal class AnimeActivityPresenterTest {
             when (scenario.intent) {
                 LoadAnimes -> fetchAnimeListUseCase()
                 is SearchAnime -> searchAnimeUseCase(scenario.intent.animeName)
-                is SelectAnime -> saveAnimeUseCase(scenario.intent.animeId)
+                is SaveAnime -> saveAnimeUseCase(scenario.intent.animeId)
             }
         }
     }
@@ -63,6 +63,6 @@ internal class AnimeActivityPresenterTest {
     enum class PresenterViewIntentScenario(val intent: AnimeActivityContract.Intent) {
         LOAD_ANIMES(LoadAnimes),
         SEARCH_ANIME(SearchAnime(animeName = "")),
-        SELECT_ANIME(SelectAnime(animeId = 101))
+        SAVE_ANIME(SaveAnime(animeId = 101))
     }
 }

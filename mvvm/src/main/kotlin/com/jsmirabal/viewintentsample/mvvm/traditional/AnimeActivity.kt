@@ -49,7 +49,7 @@ class AnimeActivity : AppCompatActivity() {
         binding.animeSearch.addTextChangedListener(
             onTextChanged = { text, _, _, _ -> viewModel.searchAnime(text.toString()) }
         )
-        binding.animeSaveButton.setOnClickListener { viewModel.onAnimeSelected(animeId = 101) }
+        binding.animeSaveButton.setOnClickListener { viewModel.saveAnime(animeId = 101) }
     }
 
     private fun showAnimeList(result: AnimeResult) {

@@ -6,7 +6,7 @@ import com.jsmirabal.viewintentsample.common.domain.usecase.SearchAnimeUseCase
 import com.jsmirabal.viewintentsample.common.viewintentcallback.ViewIntentCallback
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.LoadAnimes
 import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SearchAnime
-import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SelectAnime
+import com.jsmirabal.viewintentsample.mvp.viewintentcallback.AnimeActivityContract.Intent.SaveAnime
 import javax.inject.Inject
 
 class AnimeActivityPresenter @Inject constructor(
@@ -25,7 +25,7 @@ class AnimeActivityPresenter @Inject constructor(
         when (intent) {
             LoadAnimes -> fetchAnimes()
             is SearchAnime -> searchAnime(intent.animeName)
-            is SelectAnime -> onAnimeSelected(intent.animeId)
+            is SaveAnime -> saveAnime(intent.animeId)
         }
     }
 
@@ -43,7 +43,7 @@ class AnimeActivityPresenter @Inject constructor(
         )
     }
 
-    private fun onAnimeSelected(animeId: Int) {
+    private fun saveAnime(animeId: Int) {
         saveAnimeUseCase(animeId)
     }
 }

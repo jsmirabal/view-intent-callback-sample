@@ -17,7 +17,7 @@ fun AnimeScreen(
     uiState: State<AnimeViewState>,
     onInitialState: suspend () -> Unit,
     onAnimeSearchTextChanged: (String) -> Unit,
-    onAnimeSelected: (Int) -> Unit
+    onAnimeSaveButtonClicked: (Int) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -32,7 +32,7 @@ fun AnimeScreen(
                 .wrapContentHeight()
         )
         Button(
-            onClick = { onAnimeSelected(101) },
+            onClick = { onAnimeSaveButtonClicked(101) },
             modifier = Modifier
                 .wrapContentWidth()
                 .wrapContentHeight()

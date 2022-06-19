@@ -32,7 +32,7 @@ class AnimeActivityPresenter @Inject constructor(
         scope.launch {
             view.getAnimeSaveButtonClicks()
                 .debounce(timeoutMillis = 200)
-                .collect { onAnimeSelected(it) }
+                .collect { saveAnime(it) }
         }
     }
 
@@ -58,7 +58,7 @@ class AnimeActivityPresenter @Inject constructor(
         )
     }
 
-    private fun onAnimeSelected(animeId: Int) {
+    private fun saveAnime(animeId: Int) {
         saveAnimeUseCase(animeId)
     }
 }

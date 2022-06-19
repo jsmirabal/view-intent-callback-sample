@@ -33,7 +33,7 @@ class AnimeActivity : AppCompatActivity(), AnimeActivityContract.View {
         binding.animeSearch.addTextChangedListener(
             onTextChanged = { text, _, _, _ -> presenter.searchAnime(text.toString()) }
         )
-        binding.animeSaveButton.setOnClickListener { presenter.onAnimeSelected(animeId = 101) }
+        binding.animeSaveButton.setOnClickListener { presenter.saveAnime(animeId = 101) }
     }
 
     override fun showAnimeList(result: AnimeResult) {
